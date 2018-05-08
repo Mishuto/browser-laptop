@@ -91,9 +91,10 @@ function handleShortcut (frameKey, shortcut, e, args) {
       const tabId = frameStateUtil.getTabIdByFrameKey(windowStore.state, frameKey)
       getWebContents(tabId, (webContents) => {
         if (webContents) {
-          const frame = frameStateUtil.getFrameByKey(windowStore.state, frameKey)
           webContents.zoomIn()
-          windowActions.setLastZoomPercentage(frame, webContents.getZoomPercent())
+          // TODO: better to respond to a muon Tab event `zoom-changed` via ZoomObserver
+          // if that is provided in the future
+          tabActions.zoomChanged(tabId, webContents.getZoomPercent())
         }
       })
       break
@@ -102,9 +103,10 @@ function handleShortcut (frameKey, shortcut, e, args) {
       const tabId = frameStateUtil.getTabIdByFrameKey(windowStore.state, frameKey)
       getWebContents(tabId, (webContents) => {
         if (webContents) {
-          const frame = frameStateUtil.getFrameByKey(windowStore.state, frameKey)
           webContents.zoomOut()
-          windowActions.setLastZoomPercentage(frame, webContents.getZoomPercent())
+          // TODO: better to respond to a muon Tab event `zoom-changed` via ZoomObserver
+          // if that is provided in the future
+          tabActions.zoomChanged(tabId, webContents.getZoomPercent())
         }
       })
       break
@@ -113,9 +115,10 @@ function handleShortcut (frameKey, shortcut, e, args) {
       const tabId = frameStateUtil.getTabIdByFrameKey(windowStore.state, frameKey)
       getWebContents(tabId, (webContents) => {
         if (webContents) {
-          const frame = frameStateUtil.getFrameByKey(windowStore.state, frameKey)
           webContents.zoomReset()
-          windowActions.setLastZoomPercentage(frame, webContents.getZoomPercent())
+          // TODO: better to respond to a muon Tab event `zoom-changed` via ZoomObserver
+          // if that is provided in the future
+          tabActions.zoomChanged(tabId, webContents.getZoomPercent())
         }
       })
       break

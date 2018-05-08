@@ -770,19 +770,6 @@ const doAction = (action) => {
     case windowConstants.WINDOW_FRAME_MOUSE_LEAVE:
       windowState = windowState.setIn(['ui', 'mouseInFrame'], false)
       break
-    case windowConstants.WINDOW_ON_CERT_ERROR:
-      {
-        const frame = frameStateUtil.getFrameByTabId(windowState, action.tabId) || Immutable.Map()
-        if (frame.get('location') === action.url ||
-          frame.get('provisionalLocation') === action.url) {
-          windowActions.setFrameError(frame, {
-            url: action.url,
-            error: action.error
-          })
-          appActions.loadURLRequested(action.tabId, 'about:certerror')
-        }
-        break
-      }
     case appConstants.APP_WINDOW_READY:
     case appConstants.APP_WINDOW_UPDATED:
     case appConstants.APP_WINDOW_RESIZED:
